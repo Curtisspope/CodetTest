@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  tvc_Music.h
 //  CodeTest
 //
 //  Created by administrator on 5/11/15.
@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-@property(nonatomic,retain) IBOutlet UITableView *tv;
-
+@interface tvc_Music : UITableViewController
 
 @end
-
