@@ -11,15 +11,18 @@
 @interface tvc_Music ()
 
 @end
-NSDictionary *record;
+
 NSMutableArray *musicarray;
+NSDictionary *record;
 @implementation tvc_Music
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     musicarray=[[NSMutableArray alloc]init];
+ record=[[NSDictionary alloc]initWithObjectsAndKeys:@"Metallica",@"Artist",@"Metal band",@"Desc",@"1",@"ID",nil];
     
-    record=[NSDictionary dictionaryWithObjectsAndKeys:@"Artist",@"Metallica",@"Desc",@"Metal band",@"ID",@"1",nil];
+    [musicarray addObject:record];
+    //record=[[NSDictionary init ]:@"Artist",@"Metallica",@"Desc",@"Metal band",@"ID",@"1",nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -44,25 +47,35 @@ NSMutableArray *musicarray;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 1 ;
+    return musicarray.count ;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
    
+    static NSString *CellIdentifier = @"mycell";
+    
+    //[musicarray addObject:record];
     
     
-    [musicarray addObject:record];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mycell" forIndexPath:indexPath];
     
-    // Configure the cell...
-    cell.textLabel.text=@"hello There";
-   // cell.textLabel.text=[[musicarray objectAtIndex:indexPath.row ] objectForKey:@"Artist"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    //cell.textLabel.text=[[[musicarray objectAtIndex:indexPath.row] objectForKey:@"Artist"] capitalizedString];
-
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] ;
+        // set some cell defaults here (mainly design) ...
+    }
+    
+    
+    
+    NSString *key = [musicarray objectAtIndex:indexPath.row];
+    NSDictionary *dictionary = [record objectForKey:key];
+    
+    cell.textLabel.text=[[[musicarray objectAtIndex:indexPath.row] objectForKey:@"Artist"] capitalizedString];
+    NSLog(@"%@",[musicarray objectAtIndex:0]);
+    
     
    // cell.detailTextLabel.text=@"what";
     
@@ -82,13 +95,6 @@ NSMutableArray *musicarray;
     
     
     
-    
-    
-    
-    
-    
-
-
     UITableViewCell *selectedcell=[tableView cellForRowAtIndexPath:indexPath];
     
     
